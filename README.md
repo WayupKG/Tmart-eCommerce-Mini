@@ -8,8 +8,8 @@
   Установка Python3 на [Windows](https://www.youtube.com/watch?v=IU4-19ofajg), []()
  	 <br>
   **Git clone** <br>
-  `>>> git clone https://github.com/WayupKG/Online_Reception.git`<br>
-  `>>> cd Online_Reception`
+  `>>> https://github.com/WayupKG/Tmart-eCommerce-Mini.git`<br>
+  `>>> cd Tmart`
   
 2) ### Установка виртуального окружения
   Убедитесь, что virtualenv установлен на вашем компьютере или ноутбуке.<br>
@@ -34,6 +34,4 @@
 4) ### Запуск проекта
    Он будет работать на порту 8000 по умолчанию.<br>
   `>>> python manage.py runserver` 
- 
-5) ### Ссылка на сайт [Priom.online](https://priom.online/)
   
