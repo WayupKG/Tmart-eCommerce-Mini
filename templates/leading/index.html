@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<!-- Start Slider Area -->
+<div class="slider__container slider--one">
+    <div class="slider__activation__wrap owl-carousel owl-theme">
+        <!-- Start Single Slide -->
+        <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url({% static 'images/slider/bg/freestocks-_3Q3tsJ01nc-unsplash.jpg' %}) no-repeat scroll center center / cover ;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8 col-md-offset-2 col-lg-offset-4 col-sm-12 col-xs-12">
+                        <div class="slider__inner">
+                            <h1>Магазин <span class="text--theme">Женской</span> Одежды</h1>
+                            <div class="slider__btn">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Single Slide -->
+        <!-- Start Single Slide -->
+        <div class="slide slider__full--screen" style="background: rgba(0, 0, 0, 0) url({% static 'images/slider/bg/alex-holyoake-nA8ETI_djBs-unsplash.jpg' %}) no-repeat scroll center center / cover ;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                        <div class="slider__inner">
+                            <h1>Одностраничный <span class="text--theme">Интернет Магазин</span></h1>
+                            <div class="slider__btn">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Single Slide -->
+    </div>
+</div>
+<!-- Start Blog Area -->
+<section class="htc__blog__area bg__white pb--130" style="padding-top: 50px">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section__title text-center">
+                    <h2 class="title__line">Новые одежды</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="blog__wrap clearfix mt--60 xmt-30">
+                {% for product in new_product_3 %}
+                    <!-- Start Single Blog -->
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                        <div class="blog foo">
+                            <div class="blog__inner">
+                                <div class="blog__thumb">
+                                    <a href="{{ product.get_absolute_url }}">
+                                        {% for img in product.img.all %}
+                                            {% if img.is_main == True  %}
+                                                <img src="{{ img.image.url }}" alt="blog images">
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </a>
+                                    <div class="blog__post__time">
+                                        <div class="post__time--inner">
+                                        <span class="date">{{ product.created.day }}</span>
+                                            <span class="month">
+                                                {% for k, v in month.items %}
+                                                    {% if k == product.created.month %}
+                                                        {{ v }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog__hover__info">
+                                    <div class="blog__hover__action">
+                                        <p class="blog__des"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></p>
+                                        <ul class="bl__meta">
+                                            <li>{{ product.category }}</li>
+                                        </ul>
+                                        <div class="blog__btn">
+                                            <a class="read__more__btn" href="{{ product.get_absolute_url }}">Посмотреть</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Blog -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Blog Area -->
+
+
+<!-- Start Our Product Area -->
+<section class="htc__product__area ptb--130 bg__white">
+    <div class="container">
+        <div class="htc__product__container">
+            <!-- Start Product MEnu -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product__menu">
+                        <button data-filter="*"  class="is-checked">All</button>
+                        {% for category in categories %}
+                            <button data-filter=".cat--{{ category.id }}">{{ category.name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- End Product MEnu -->
+            <div class="row">
+                <div class="product__list another-product-style">
+                    {% for product in products %}
+                    <!-- Start Single Product -->
+                    <div class="col-md-3 single__pro col-lg-3 cat--{{ product.category.id }} col-sm-4 col-xs-12">
+                        <div class="product foo">
+                            <div class="product__inner">
+                                <div class="pro__thumb">
+                                    <a href="{{ product.get_absolute_url }}">
+                                        {% for img in product.img.all %}
+                                            {% if img.is_main == True  %}
+                                                <img src="{{ img.image.url }}" alt="product images">
+                                            {% endif %}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product__details">
+                                <h2><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
+                                <ul class="product__price">
+                                    {% if product.status_stock == 'Да' %}
+                                        <li class="old__price">{{ product.price }} cом</li>
+                                        <li class="new__price">{{ product.price_stock }} cом</li>
+                                    {% else %}
+                                        <li class="new__price">{{ product.price }} cом</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Product -->
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Our Product Area -->
+
+
+    {% include 'shop/popap_product.html' %}
+{% endblock %}
